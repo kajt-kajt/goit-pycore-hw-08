@@ -7,6 +7,7 @@ from unittest import TestCase
 from unittest.mock import patch
 import io
 import sys
+from pathlib import Path
 from main import main
 
 
@@ -19,11 +20,12 @@ class TestBot(TestCase):
                                           'exit'])
     def test_hello(self, mock_input):
         """
-        Just hello and exit
+        Just hello and exit.
+        No saving to file.
         """
         captured_output = io.StringIO()
         sys.stdout = captured_output
-        main() ### running main script
+        main(filename=None) ### running main script
         sys.stdout = sys.__stdout__
         ### check all the output
         self.assertEqual(captured_output.getvalue(),
@@ -40,11 +42,12 @@ class TestBot(TestCase):
                                           'exit'])
     def test_add_contact_all(self, mock_input):
         """
-        Add one contact and verify through all that it exists
+        Add one contact and verify through all that it exists.
+        No saving to file.
         """
         captured_output = io.StringIO()
         sys.stdout = captured_output
-        main() ### running main script
+        main(filename=None) ### running main script
         sys.stdout = sys.__stdout__
         ### check all the output
         self.assertEqual(captured_output.getvalue(),
@@ -62,11 +65,12 @@ class TestBot(TestCase):
                                           'exit'])
     def test_add_contact_phone(self, mock_input):
         """
-        Add new contact and try to get it back with phone
+        Add new contact and try to get it back with phone.
+        No saving to file.
         """
         captured_output = io.StringIO()
         sys.stdout = captured_output
-        main() ### running main script
+        main(filename=None) ### running main script
         sys.stdout = sys.__stdout__
         ### check all the output
         self.assertEqual(captured_output.getvalue(),
@@ -88,11 +92,12 @@ class TestBot(TestCase):
                                           'exit'])
     def test_add_contact_double_phone(self, mock_input):
         """
-        Add new contact, add one more phone and try to get it back with phone
+        Add new contact, add one more phone and try to get it back with phone.
+        No saving to file.
         """
         captured_output = io.StringIO()
         sys.stdout = captured_output
-        main() ### running main script
+        main(filename=None) ### running main script
         sys.stdout = sys.__stdout__
         ### check all the output
         self.assertEqual(captured_output.getvalue(),
@@ -116,10 +121,11 @@ class TestBot(TestCase):
     def test_hello_misc(self, mock_input):
         """
         Various options for hello: different case, additional parameters etc.
+        No saving to file.
         """
         captured_output = io.StringIO()
         sys.stdout = captured_output
-        main() ### running main script
+        main(filename=None) ### running main script
         sys.stdout = sys.__stdout__
         ### check all the output
         self.assertEqual(captured_output.getvalue(),
@@ -139,11 +145,12 @@ class TestBot(TestCase):
                                           'exit'])
     def test_add_contact_misc(self, mock_input):
         """
-        Wrong number of arguments for add contact
+        Wrong number of arguments for add contact.
+        No saving to file.
         """
         captured_output = io.StringIO()
         sys.stdout = captured_output
-        main() ### running main script
+        main(filename=None) ### running main script
         sys.stdout = sys.__stdout__
         ### check all the output
         self.assertEqual(captured_output.getvalue(),
@@ -163,10 +170,11 @@ class TestBot(TestCase):
     def test_random_input(self, mock_input):
         """
         Strings that are not commands at all.
+        No saving to file.
         """
         captured_output = io.StringIO()
         sys.stdout = captured_output
-        main() ### running main script
+        main(filename=None) ### running main script
         sys.stdout = sys.__stdout__
         ### check all the output
         self.assertEqual(captured_output.getvalue(),
@@ -184,11 +192,12 @@ class TestBot(TestCase):
                                           'exit'])
     def test_all_phone_misc(self, mock_input):
         """
-        all and phone with wrong arguments and empty base
+        All and phone with wrong arguments and empty base.
+        No saving to file.
         """
         captured_output = io.StringIO()
         sys.stdout = captured_output
-        main() ### running main script
+        main(filename=None) ### running main script
         sys.stdout = sys.__stdout__
         ### check all the output
         self.assertEqual(captured_output.getvalue(),
@@ -208,11 +217,12 @@ class TestBot(TestCase):
                                           'exit'])
     def test_change(self, mock_input):
         """
-        Basic scenario for changing phone number in database
+        Basic scenario for changing phone number in database.
+        No saving to file.
         """
         captured_output = io.StringIO()
         sys.stdout = captured_output
-        main() ### running main script
+        main(filename=None) ### running main script
         sys.stdout = sys.__stdout__
         ### check all the output
         self.assertEqual(captured_output.getvalue(),
@@ -247,12 +257,13 @@ class TestBot(TestCase):
                                           'close'])
     def test_change_misc(self, mock_input):
         """
-        Various weird scenarios for changing phone number in database
+        Various weird scenarios for changing phone number in database.
+        No saving to file.
         """
         self.maxDiff = None
         captured_output = io.StringIO()
         sys.stdout = captured_output
-        main() ### running main script
+        main(filename=None) ### running main script
         sys.stdout = sys.__stdout__
         ### check all the output
         self.assertEqual(captured_output.getvalue(),
@@ -285,11 +296,12 @@ class TestBot(TestCase):
                                           'close'])
     def test_add_birthday_misc(self, mock_input):
         """
-        Various weird scenarios for adding contact birthday
+        Various weird scenarios for adding contact birthday.
+        No saving to file.
         """
         captured_output = io.StringIO()
         sys.stdout = captured_output
-        main() ### running main script
+        main(filename=None) ### running main script
         sys.stdout = sys.__stdout__
         ### check all the output
         self.assertEqual(captured_output.getvalue(),
@@ -323,11 +335,12 @@ class TestBot(TestCase):
                                           'close'])
     def test_birthday(self, mock_input):
         """
-        Typical set of operations with birthday
+        Typical set of operations with birthday.
+        No saving to file.
         """
         captured_output = io.StringIO()
         sys.stdout = captured_output
-        main() ### running main script
+        main(filename=None) ### running main script
         sys.stdout = sys.__stdout__
         ### check all the output
         self.assertEqual(captured_output.getvalue(),
@@ -360,11 +373,12 @@ class TestBot(TestCase):
                                           'exit'])
     def test_change_to_duplicate(self, mock_input):
         """
-        Various weird scenarios for changing phone number in database
+        Various weird scenarios for changing phone number in database.
+        No saving to file.
         """
         captured_output = io.StringIO()
         sys.stdout = captured_output
-        main() ### running main script
+        main(filename=None) ### running main script
         sys.stdout = sys.__stdout__
         ### check all the output
         self.assertEqual(captured_output.getvalue(),
@@ -379,6 +393,90 @@ class TestBot(TestCase):
         ### check input prompts
         for _ in range(7):
             mock_input.assert_called_with("Enter a command: ")
+
+
+    @patch('builtins.input', side_effect=['all',
+                                          'add Peter 0123456789',
+                                          'add Peter 1234567890',
+                                          'add-birthday Peter 10.11.2020',
+                                          'add Ann 2345678901',
+                                          'all',
+                                          'exit',
+                                          'all',
+                                          'exit'])
+    def test_save_and_load(self, mock_input):
+        """
+        Starting with empty database, saving, loading it back and checking contents.
+        """
+        captured_output = io.StringIO()
+        sys.stdout = captured_output
+        # create tmp dir for tests and ensure file is absent
+        test_dir = "./tmp/"
+        test_file_name = test_dir + "test_address_book.pkl"
+        Path(test_dir).mkdir()
+        Path(test_file_name).unlink(missing_ok=True)
+        ### running main script twice
+        main(filename=test_file_name)
+        main(filename=test_file_name)
+        sys.stdout = sys.__stdout__
+        ### check all the output
+        self.assertEqual(captured_output.getvalue(),
+                         "Warning: unable to load state from './tmp/test_address_book.pkl': [Errno 2] No such file or directory: './tmp/test_address_book.pkl'\n"
+                         + "Welcome to the assistant bot!\n"
+                         + "\n"
+                         + "Contact added.\n"*2
+                         + "Birthday information added.\n"
+                         + "Contact added.\n"
+                         + "Peter(10.11.2020): 0123456789; 1234567890\n"
+                         + "Ann: 2345678901\n"
+                         + "Good bye!\n"
+                         + "Welcome to the assistant bot!\n"
+                         + "Peter(10.11.2020): 0123456789; 1234567890\n"
+                         + "Ann: 2345678901\n"
+                         + "Good bye!\n")
+        ### check input prompts
+        for _ in range(9):
+            mock_input.assert_called_with("Enter a command: ")
+        ### filesystem cleanup
+        Path(test_file_name).unlink()
+        Path(test_dir).rmdir()
+
+
+    @patch('builtins.input', side_effect=['all',
+                                          'exit'])
+    def test_save_and_load_misc(self, mock_input):
+        """
+        Reading from file with various errors
+        """
+        captured_output = io.StringIO()
+        sys.stdout = captured_output
+        # create tmp dir for tests and ensure file is absent
+        try:
+            test_dir = "./tmp/"
+            test_file_name = test_dir + "test_address_book.pkl"
+            Path(test_dir).mkdir()
+            Path(test_file_name).touch(mode=0o400)
+            ##### running main script
+            ## with empty file - wrong format
+            ## file read only - unable to write
+            main(filename=test_file_name)
+            sys.stdout = sys.__stdout__
+            ### check all the output
+            self.assertEqual(captured_output.getvalue(),
+                         "Warning: unable to load state from './tmp/test_address_book.pkl': Ran out of input\n"
+                         + "Welcome to the assistant bot!\n"
+                         + "\n"
+                         + "Good bye!\n"
+                         + "Error saving state: [Errno 13] Permission denied: './tmp/test_address_book.pkl'\n")
+            ### check input prompts
+            for _ in range(2):
+                mock_input.assert_called_with("Enter a command: ")
+        except Exception as e:
+            raise e
+        finally:
+            ### filesystem cleanup
+            Path(test_file_name).unlink()
+            Path(test_dir).rmdir()
 
 
 if __name__ == '__main__':

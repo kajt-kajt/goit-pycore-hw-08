@@ -2,16 +2,54 @@
 Entry point
 """
 
+import pickle
 from collections import defaultdict
 from src.handlers import *
 from src.entities import AddressBook
 
-def main():
+def save_data(book: AddressBook, filename: str="addressbook.pkl") -> None:
+    """
+    Save AddressBook with all its object hierarchy to file in binary format
+    "filename" may be empty or None to indicate that no saving is necessary.
+    """
+    if not filename:
+        return
+    try:
+        with open(filename, "wb") as file:
+            pickle.dump(book, file)
+    except IOError as e:
+        print(f"Error saving state: {e}")
+
+def load_data(filename: str="addressbook.pkl") -> AddressBook:
+    """
+    Load AddressBook previously saved by "save_data" function
+    """
+    # empty str or None indicate to start with empty AddressBook
+    if not filename:
+        return AddressBook()
+    try:
+        with open(filename, "rb") as file:
+            return pickle.load(file)
+    except (IOError, EOFError) as e:
+        # EOFError is for wrong file format
+        print(f"Warning: unable to load state from '{filename}': {e}")
+        return AddressBook()
+
+def main(start_empty: bool = False, filename: str = "addressbook.pkl"):
     """
     Main loop for bot
+
+    "start_empty" flag indicates to start with empty AddressBook
+        and to use filename to save final state only.
+    
+    "filename" is a path to file to save database state. 
+        None or empty string would indicate to work in memory only. 
     """
 
-    contacts = AddressBook()
+    if start_empty:
+        contacts = load_data(None)
+    else:
+        contacts = load_data(filename)
 
     # command handlers
 
@@ -42,6 +80,9 @@ def main():
         user_input = input("Enter a command: ")
         command, *args = parse_input(user_input)
         print(handlers[command](args, contacts))
+
+    save_data(contacts, filename)
+
 
 if __name__ == "__main__":
     main()
